@@ -1,0 +1,26 @@
+.item{
+    padding: 1rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+    border-radius: 14px;
+    background-color: white;
+    width: 90%;
+    height: 40%;
+    display:flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin: 1% auto;
+}
+.inf{
+    height: 50%;
+}
+.infItem{
+    margin: 2px;
+    cursor: pointer;
+}
+.infItem span{
+   font-weight: bold;
+}
+.img{
+    height: 90%;
+}

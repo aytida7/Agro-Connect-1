@@ -1,0 +1,37 @@
+.form{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    text-align: left;
+    background-color: rgb(117, 224, 67);
+    padding: 3%;
+}
+.field label{
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+.field input{
+    font: inherit;
+    padding: 0.5rem;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    width: 90%;
+    max-width: 100%;
+}
+.btnfield{
+    text-align: left;
+}
+.button{
+    cursor: pointer;
+    border: none;
+    background-color: rgb(88, 23, 23);
+    color: white;
+    padding: 0.5rem 1rem;
+    margin: 1%;
+    border-radius: 25px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 1.2rem;
+    font-weight: bold;
+}

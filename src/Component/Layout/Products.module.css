@@ -1,0 +1,23 @@
+.prod{
+    padding: 1rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+    border-radius: 14px;
+    background-color: white;
+    width: 95vw;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    margin: auto;
+    margin-top: 12vh;
+
+}
+.input{
+    padding: 10px;
+    border-radius: 17px;
+    width: 50%;
+    margin: auto;
+}
+.list{
+    display: flex;
+    flex-direction: column;
+}

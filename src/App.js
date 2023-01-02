@@ -1,23 +1,31 @@
-import logo from './logo.svg';
+
 import './App.css';
+import Nav from './Component/Navbar/nav';
+import Customer from './Component/Customer';
+import { useState } from 'react';
+import Profile from './FarmerComp/Profile/Profile';
 
 function App() {
+  const [showCart,setShowCart]=useState(false);
+  const [isFarmer,setIsFarmer]=useState(false);
+  const showCartHandler=()=>{
+    setShowCart(true);
+  };
+  const hideCartHandler=()=>{
+    setShowCart(false);
+};
+const showFarmerHandler=()=>{
+  setIsFarmer(true);
+};
+const orderItemHandler=(orderedItems)=>{
+  console.log(orderedItems );
+};
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <Nav showCart={showCartHandler} showFarmer={showFarmerHandler} ></Nav>
+    {!isFarmer && <Customer showCart={showCart} hideCart={hideCartHandler} onOrderItems={orderItemHandler}></Customer>}
+    {isFarmer && <Profile />}
+
     </div>
   );
 }
