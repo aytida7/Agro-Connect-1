@@ -1,8 +1,12 @@
-import React, { useContext, useState } from "react";
+import React, {  useState } from "react";
+import { useDispatch } from "react-redux";
 import classes from './itemForm.module.css';
-import CartContext from '../../Context/CartContext';
+import { cartActions } from "../../store/cart-slice";
+// import CartContext from '../../Context/CartContext';
 const ItemForm=(props)=>{
-    const CartCtx=useContext(CartContext);
+    // const CartCtx=useContext(CartContext);
+    const dispatch=useDispatch();
+    
     const [enteredAmount,setEnteredAmount]=useState(1);
     const [hasError,setHasError]=useState(false);
     const amountChangeHandler=(event)=>{
@@ -39,7 +43,6 @@ const ItemForm=(props)=>{
           setHasError(true);
           return;
          }
-      
          const item={
           id:props.id,
          name:props.name,
@@ -47,7 +50,8 @@ const ItemForm=(props)=>{
          amount:+enteredAmount
          };
 
-        CartCtx.addItem(item);
+        // CartCtx.addItem(item);
+        dispatch(cartActions.addItem(item));
         setEnteredAmount(1);
         setHasError(false);
     };

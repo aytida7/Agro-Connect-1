@@ -2,28 +2,20 @@
 import './App.css';
 import Nav from './Component/Navbar/nav';
 import Customer from './Component/Customer';
-import { useState } from 'react';
+// import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import Profile from './FarmerComp/Profile/Profile';
 
 function App() {
-  const [showCart,setShowCart]=useState(false);
-  const [isFarmer,setIsFarmer]=useState(false);
-  const showCartHandler=()=>{
-    setShowCart(true);
-  };
-  const hideCartHandler=()=>{
-    setShowCart(false);
-};
-const showFarmerHandler=()=>{
-  setIsFarmer(true);
-};
+  const showCart=useSelector(state=>state.ui.showCart);
+  const isFarmer=useSelector(state=>state.ui.isFarmer);
 const orderItemHandler=(orderedItems)=>{
   console.log(orderedItems );
 };
   return (
     <div className="App">
-    <Nav showCart={showCartHandler} showFarmer={showFarmerHandler} ></Nav>
-    {!isFarmer && <Customer showCart={showCart} hideCart={hideCartHandler} onOrderItems={orderItemHandler}></Customer>}
+    <Nav></Nav>
+    {!isFarmer && <Customer showCart={showCart} onOrderItems={orderItemHandler}></Customer>}
     {isFarmer && <Profile />}
 
     </div>

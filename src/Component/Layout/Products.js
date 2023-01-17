@@ -73,7 +73,7 @@ const searchHandler=(event)=>{
 }
 if(searchElement.trim().length>0){
      FilteredProducts=productsAv.filter(elem=>{
-        return elem.props.name.includes(searchElement);
+        return (elem.props.name.toUpperCase().includes(searchElement) || elem.props.name.toLowerCase().includes(searchElement.toLowerCase()));
     });
     if(FilteredProducts.length===0){
         FilteredProducts="No Results Found";

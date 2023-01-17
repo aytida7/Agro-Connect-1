@@ -1,6 +1,7 @@
 import React from 'react';
 import classes from './CartItem.module.css';
 
+
 const CartItem = (props) => {
   const price = `Rs.${props.price.toFixed(2)}`;
 
