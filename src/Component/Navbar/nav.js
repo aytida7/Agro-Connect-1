@@ -1,34 +1,31 @@
 import React from "react";
 import classes from './nav.module.css';
-import logo from '../../images/logo.png';
+import logo from '../../images/logo1.png';
 import { useDispatch,useSelector } from "react-redux";
 import { uiActions } from "../../store/ui-slice";
+import { NavLink } from "react-router-dom";
 
 const Nav=(props)=>{
     const dispatch=useDispatch();
-    const isFarmer=useSelector(state=>state.ui.isFarmer);
+    const isLoggedInAsFarmer=useSelector(state=>state.ui.isLoggedInAsFarmer);
     const showCartHandler=()=>{
         dispatch(uiActions.Cart());
     };
-    const showFarmerHandler=()=>{
-        dispatch(uiActions.showFarmer());
-    };
-    let textStatus="Sell Your Product";
-    if(isFarmer){
-        textStatus="Customer Page";
-    }
+
     return<div className={classes.navbar}>
         <div className={classes.navitem}>
             <img src={logo} alt="Loading"></img>
-            <h2>AGRO-connect</h2>
+            <h2><NavLink to='/'>AGRO-connect</NavLink></h2>
         </div>
         <div className={classes.navitem}>
-        <button onClick={showFarmerHandler}>{textStatus}</button>
+       {isLoggedInAsFarmer && <NavLink to='/farmer' className={({isActive})=>isActive ? classes.active : undefined}>Sell Your Product</NavLink>}
+       {!isLoggedInAsFarmer && <a href='http://localhost:8000//accounts/login' className={({isActive})=>isActive ? classes.active : undefined}>Sell Your Product</a>}
         </div>
         <div className={classes.navitem}>
-            <button onClick={showCartHandler} >Cart</button>
+        <NavLink to='/profile' className={({isActive})=>isActive ? classes.active : undefined}>Profile</NavLink>
+            <button onClick={showCartHandler} >Cart</button> 
             <button>Connect</button>
-            <button>Profile</button>
+            {/* <button>Profile</button> */}
         </div>
     </div>
 };

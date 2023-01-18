@@ -12,7 +12,7 @@ const Item =(props)=>{
     const hideDescHandler=()=>{
         setShowDesc(false);
     };
-    return <div className={classes.item}>
+    return <div className={classes.item} >
            <img src={logo} alt="loading" onClick={showFullDesc} className={classes.img}></img>
            <div className={classes.inf}>
             <p className={classes.infItem}><span onClick={showFullDesc}>{props.name}</span></p>
@@ -21,7 +21,7 @@ const Item =(props)=>{
            </div>
            <ItemForm name={props.name} price={props.price} quantity={props.quantity} id={props.id} />
            {showDesc && <Description hideDesc={hideDescHandler} />}
-    </div>
+   </div>
 };
 
 export default Item;

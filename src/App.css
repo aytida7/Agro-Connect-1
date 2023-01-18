@@ -27,20 +27,14 @@
 .App-link {
   color: #61dafb;
 }
-button{
+ button{
   cursor: pointer;
-  padding: 10px;
-  border-radius: 10px;
-  color: white;
-  background-color: black;
-  margin: 5px;
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-  font-weight: bold;
 }
-button:hover,
+/* button:hover,
 button:active{
-  background-color: greenyellow;
-}
+  background-color: white;
+  color: black;
+} */ */
 img{
   cursor: pointer;
 }

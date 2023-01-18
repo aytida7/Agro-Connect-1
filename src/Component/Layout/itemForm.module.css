@@ -1,34 +1,48 @@
 .form{
     display: flex;
     flex-direction: column;
-
 }
 .amt{
-    display: flex;
-    flex-direction: row;
-    margin: 10px 0px;
-    width: 100%;
-
+  display: flex;
+  flex-direction: row;
+justify-content: space-between;
 }
 .label{
-    width: 32%;
+    width: 40%;
     margin: auto 0px;
+    margin-right: 2px;
     font-weight: bold;
-    
-}
-.input{
-    border-radius: 6px;
-    width: 16%;
     font-size: 1rem;
-    font-weight: bold;
 }
+
 .btn{
-    width: 80%;
+    width: 100%;
     margin: auto;
+    color: blue;
+    background-color: white;
+    border:2px solid blue;
+    cursor: pointer;
+  padding: 10px;
+  border-radius: 5px;
+}
+.btn:hover{
+    color: white;
+    background-color: blue;
 }
 .add{
-    width: 16%;
+   margin: 0px 5px;
+   margin-bottom: 5px;
+   
 }
-.sub{
-    width: 16%;
+.addB{
+   padding:6px 9px;
+   font-weight: bold;
+   color: brown;
+   background-color: white;
+   border-radius: 7px;
+   border: 1px solid brown;
+}
+.addB:hover{
+    background-color: brown;
+    color: white;
 }

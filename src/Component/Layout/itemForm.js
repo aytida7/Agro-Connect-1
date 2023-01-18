@@ -9,9 +9,9 @@ const ItemForm=(props)=>{
     
     const [enteredAmount,setEnteredAmount]=useState(1);
     const [hasError,setHasError]=useState(false);
-    const amountChangeHandler=(event)=>{
-      setEnteredAmount(event.target.value);
-    };
+    // const amountChangeHandler=(event)=>{
+    //   setEnteredAmount(event.target.value);
+    // };
     const onAdd=(event)=>{
       if(enteredAmount===props.quantity){
         setHasError(true);
@@ -19,7 +19,6 @@ const ItemForm=(props)=>{
       }
       if(enteredAmount===1){
         setHasError(false);
-  
       }
 
      setEnteredAmount(enteredAmount+1);
@@ -29,9 +28,11 @@ const ItemForm=(props)=>{
         setHasError(true);
         return;
       }
+      if(enteredAmount<=props.quantity){
+        setHasError(false);
+      }
      setEnteredAmount(enteredAmount-1);
     }
-
 
     const submitHandler=(event)=>{
           event.preventDefault();
@@ -58,13 +59,15 @@ const ItemForm=(props)=>{
 
     return <form className={classes.form} onSubmit={submitHandler}>
       <div className={classes.amt}>
-      <label htmlFor="amt" className={classes.label}>Amount: </label>
-      <input id="amt" type='number' value={enteredAmount} min='1' className={classes.input} onChange={amountChangeHandler} />
-      <button type="button" onClick={onAdd} className={classes.add}>+</button>
-      <button type="button" onClick={onSub} className={classes.sub}>-</button>
+      <p className={classes.label}>Amount:{enteredAmount}</p>
+      <div className={classes.add}>
+      <button type="button" onClick={onAdd} className={classes.addB}>+</button>
+      <button type="button" onClick={onSub} className={classes.addB}>-</button>
+      </div>
       </div>
       <button type="submit" className={classes.btn}>+Add To Cart</button>
       {hasError && <p>Please enter valid input</p>}
+
     </form>
 };
 

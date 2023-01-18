@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import classes from './AddItem.module.css';
 import Modal from "../../Component/UI/Modal";
-
+import { Link } from "react-router-dom";
 const AddItem=(props)=>{
     const [enteredId,setEnteredId]=useState('');
     const [enteredName,setEnteredName]=useState('');
@@ -41,7 +41,7 @@ const AddItem=(props)=>{
         expDate:enteredExpDate
     };
     console.log(item);
-    props.onCancel();
+    // props.onCancel();
     setEnteredId('');
     setEnteredName('');
     setEnteredDesc('');
@@ -74,8 +74,8 @@ const AddItem=(props)=>{
          <input type='date' id="expDate" value={enteredExpDate} name="expDate" min='0' onChange={expDateChangeHandler}/>
          </div>
          <div className={classes.btnfield}>
-         <button type="button" className={classes.button} onClick={props.onCancel}>Cancel</button>
-         <button type='submit' className={classes.button} onClick={submitHandler}>Add Item</button>
+         <Link className={classes.button} to='..' relative='path'>Cancel</Link>
+         <button type='submit' className={classes.button} onClick={submitHandler}><Link to='..' relative='path' className={classes.a}>Add Item</Link></button>
          </div>
     </form>
     </Modal>

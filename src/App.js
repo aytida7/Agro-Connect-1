@@ -1,25 +1,36 @@
-
 import './App.css';
-import Nav from './Component/Navbar/nav';
+import { createBrowserRouter,RouterProvider } from 'react-router-dom';
 import Customer from './Component/Customer';
-// import { useState } from 'react';
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
 import Profile from './FarmerComp/Profile/Profile';
+import Root from './Root';
+import AddItem from './FarmerComp/AddProduct/AddItem';
+// import { useEffect } from 'react';
+// import { useDispatch } from 'react-redux';
+// import { uiActions } from './store/ui-slice';
 
+
+
+const router=createBrowserRouter([
+  {path:'/',
+element:<Root />,
+children:[
+  {index:true,element:<Customer />},
+  {path:'/farmer',element:<Profile />},
+  {path:'/profile',element:<Profile />},
+  {path:'/farmer/addItem',element:<AddItem />}
+]}
+])
 function App() {
-  const showCart=useSelector(state=>state.ui.showCart);
-  const isFarmer=useSelector(state=>state.ui.isFarmer);
-const orderItemHandler=(orderedItems)=>{
-  console.log(orderedItems );
-};
-  return (
-    <div className="App">
-    <Nav></Nav>
-    {!isFarmer && <Customer showCart={showCart} onOrderItems={orderItemHandler}></Customer>}
-    {isFarmer && <Profile />}
+// const dispatch=useDispatch();
 
-    </div>
-  );
+  // useEffect(()=>{
+  //   dispatch(uiActions.loginAsFarmer());
+  // },[])
+//   const isFarmer=useSelector(state=>state.ui.isFarmer);
+// const orderItemHandler=(orderedItems)=>{
+//   console.log(orderedItems );
+return <RouterProvider router={router} />;
 }
 
 export default App;
