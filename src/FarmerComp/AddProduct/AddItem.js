@@ -2,7 +2,14 @@ import React, { useState } from "react";
 import classes from './AddItem.module.css';
 import Modal from "../../Component/UI/Modal";
 import { Link } from "react-router-dom";
+import { saveProduct } from "../../store/products-action";
+import { useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
+import Notification from "../../Component/UI/Notification";
 const AddItem=(props)=>{
+    const dispatch=useDispatch();
+    const notification=useSelector(state=>state.ui.Notification);
+    const [hasError,setHasError]=useState(false);
     const [enteredId,setEnteredId]=useState('');
     const [enteredName,setEnteredName]=useState('');
     const [enteredDesc,setEnteredDesc]=useState('');
@@ -30,8 +37,10 @@ const AddItem=(props)=>{
   const submitHandler=(event)=>{
      event.preventDefault();
      if(enteredId.trim().length===0 || enteredName.trim().length===0 || enteredPrice.trim().length<2){
+        setHasError(true);
         return;
      }
+     setHasError(false);
     const item={
         id:enteredId,
         name:enteredName,
@@ -41,11 +50,13 @@ const AddItem=(props)=>{
         expDate:enteredExpDate
     };
     console.log(item);
-    // props.onCancel();
+    dispatch(saveProduct(item));
     setEnteredId('');
     setEnteredName('');
     setEnteredDesc('');
     setEnteredPrice('');
+    setEnteredQuantity('');
+    setEnteredExpDate('');
   };
     return <Modal onClick={props.onCancel}>
         <form className={classes.form} onSubmit={submitHandler}>
@@ -73,9 +84,14 @@ const AddItem=(props)=>{
          <label htmlFor="expDate">Expires On: </label>
          <input type='date' id="expDate" value={enteredExpDate} name="expDate" min='0' onChange={expDateChangeHandler}/>
          </div>
+         {hasError && <p className={classes.error}>*Please Enter valid inputs.</p>}
          <div className={classes.btnfield}>
          <Link className={classes.button} to='..' relative='path'>Cancel</Link>
-         <button type='submit' className={classes.button} onClick={submitHandler}><Link to='..' relative='path' className={classes.a}>Add Item</Link></button>
+         <button type='submit' className={classes.button} onClick={submitHandler}>Add Item</button>
+         {notification && <Notification
+             title={notification.title} 
+             status={notification.status} 
+             message={notification.message} />}
          </div>
     </form>
     </Modal>

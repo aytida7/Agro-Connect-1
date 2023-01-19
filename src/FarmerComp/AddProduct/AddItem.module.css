@@ -12,6 +12,10 @@
     margin-bottom: 0.5rem;
     display: block;
 }
+.error{
+    color: red;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
 .field input{
     font: inherit;
     padding: 0.5rem;

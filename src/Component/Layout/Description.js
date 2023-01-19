@@ -1,6 +1,6 @@
 import React from "react";
 import Modal from "../UI/Modal";
-import logo from '../../images/logo.png';
+import logo from '../../images/prodimg.jpg';
 import classes from './Description.module.css';
 
 const Description=(props)=>{

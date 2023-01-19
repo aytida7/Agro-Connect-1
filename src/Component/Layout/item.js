@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import logo from '../../images/logo.png';
+import logo from '../../images/prodimg.jpg';
 import classes from './item.module.css';
 import ItemForm from './itemForm';
 import Description from './Description';

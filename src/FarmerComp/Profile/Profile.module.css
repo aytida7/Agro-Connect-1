@@ -12,3 +12,13 @@
     align-items: center;
     justify-content: space-between;
 }
+.link{
+    padding: 10px;
+    background-color: black;
+    color: white;
+    text-decoration: none;
+    border-radius: 10px;
+}
+.link:hover{
+    background-color: blue;
+}

@@ -23,7 +23,7 @@ const Nav=(props)=>{
         </div>
         <div className={classes.navitem}>
         <NavLink to='/profile' className={({isActive})=>isActive ? classes.active : undefined}>Profile</NavLink>
-            <button onClick={showCartHandler} >Cart</button> 
+            <button onClick={showCartHandler}>Cart</button> 
             <button>Connect</button>
             {/* <button>Profile</button> */}
         </div>

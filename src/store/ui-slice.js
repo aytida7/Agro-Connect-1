@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const uiSlice=createSlice({
     name:'ui',
-    initialState:{showCart:false,isLoggedIn:true,isLoggedInAsFarmer:true},
+    initialState:{showCart:false,isLoggedIn:true,isLoggedInAsFarmer:true,Notification:null},
     reducers:{
        Cart(state){
         state.showCart=true;
@@ -19,7 +19,14 @@ const uiSlice=createSlice({
          },
          loginAsFarmer(state){
             state.isLoggedInAsFarmer=true;
-         }
+         },
+         showNotification(state,action){
+            state.Notification={
+                status:action.payload.status,
+                title:action.payload.title,
+                message:action.payload.message
+            }
+        }
     }
 });
 

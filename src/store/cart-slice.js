@@ -30,6 +30,10 @@ const cartSlice=createSlice({
                 deleteItem.amount--;
                }
         },
+        orderHandler(state,action){
+            console.log("Ordered");
+            console.log(action.payload);
+        },
         clearCart(state){
          state.items=[];
          state.totalAmount=0;
