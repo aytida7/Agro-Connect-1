@@ -11,6 +11,7 @@ import { useDispatch } from 'react-redux';
 import AuthenticationPage from './pages/Authentication';
 import { fetchAvailableProducts } from './store/products-action';
 import CustumerProfile from './Component/Layout/Custumer-Profile';
+import { tokenLoader } from './util/auth';
 
 // import { uiActions } from './store/ui-slice';
 
@@ -18,6 +19,8 @@ const router=createBrowserRouter([
   {path:'/',
 element:<Root />,
 errorElement:<ErrorPage/>,
+id:'root',
+loader:tokenLoader,
 children:[
   {index:true,element:<Custumer />},
   {path:'farmer',element:<Profile />},

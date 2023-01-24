@@ -8,13 +8,14 @@ import { cartActions } from "../../store/cart-slice";
 import { saveOrder } from "../../store/products-action";
 import { editData } from "../../store/products-action";
 import Notification from "../UI/Notification";
+import { Link, useRouteLoaderData } from "react-router-dom";
 
 const Cart=(props)=>{
     const dispatch=useDispatch();
+    const token=useRouteLoaderData('root');
     const notification=useSelector(state=>state.ui.Notification);
     const items=useSelector(state=>state.cart.items);
     const avlProducts=useSelector(state=>state.prod.Available_Products);
-    const isLoggedIn=useSelector(state=>state.ui.isLoggedIn);
     const totalAmount=useSelector(state=>state.cart.totalAmount);
     const [error,setError]=useState(false);
     const hideCartHandler=()=>{
@@ -109,8 +110,8 @@ const Cart=(props)=>{
      </div>
      <div className={classes.actions}>
         <button className={classes['button--alt']} onClick={hideCartHandler}>Close</button>
-       {hasItems && isLoggedIn && <button className={classes.button} onClick={orderHandler}>Order</button>}
-       {hasItems && !isLoggedIn && <a className={classes.button} href='http://localhost:8000//accounts/login'>Order</a>}
+       {hasItems && token && <button className={classes.button} onClick={orderHandler}>Order</button>}
+       {hasItems && !token && <Link className={classes.button} to='auth'>Order</Link>}
        {notification && <Notification
              title={notification.title} 
              status={notification.status} 
