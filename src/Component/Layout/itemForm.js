@@ -2,6 +2,7 @@ import React, {  useState } from "react";
 import { useDispatch } from "react-redux";
 import classes from './itemForm.module.css';
 import { cartActions } from "../../store/cart-slice";
+import carticon from '../../images/cart-icon.png';
 // import CartContext from '../../Context/CartContext';
 const ItemForm=(props)=>{
     // const CartCtx=useContext(CartContext);
@@ -65,8 +66,9 @@ const ItemForm=(props)=>{
       <button type="button" onClick={onSub} className={classes.addB}>-</button>
       </div>
       </div>
-      <button type="submit" className={classes.btn}>+Add To Cart</button>
-      {hasError && <p>Please enter valid input</p>}
+      <button type="submit" className={classes.btn}><img src={carticon} alt="Loading..." className={classes.carticon}></img><span>+Add To Cart</span></button>
+  
+      {hasError && <p className={classes.error}>**Amount Exceeded**</p>}
 
     </form>
 };

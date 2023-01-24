@@ -21,19 +21,27 @@ justify-content: space-between;
     color: blue;
     background-color: white;
     border:2px solid blue;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
-  padding: 10px;
-  border-radius: 5px;
+  border-radius: 45px;
+
 }
 .btn:hover{
     color: white;
     background-color: blue;
+}
+.error{
+    color: red;
+    font-weight: bold;
 }
 .add{
    margin: 0px 5px;
    margin-bottom: 5px;
    
 }
+
 .addB{
    padding:6px 9px;
    font-weight: bold;

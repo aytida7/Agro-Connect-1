@@ -1,3 +1,4 @@
+
 import { productsActions } from "./product-slice";
 import { uiActions } from "./ui-slice";
 
@@ -104,6 +105,79 @@ export const saveOrder=(item)=>{
                 message:'Saving Order data failed !!'
               }));
         }
+
+    };
+};
+export const editData=(idArray)=>{
+    return async(dispatch)=>{
+        console.log(idArray);
+        const fetchData=async()=>{
+            const response=await fetch('https://agro-connect-e7a75-default-rtdb.firebaseio.com/availableProducts.json');
+            if(!response.ok){
+                throw new Error();
+            };
+            const data=await response.json();
+            return data;
+        };
+        const productData=await fetchData();
+        for(const i in productData){
+            console.log(productData[i].id);
+             for(const j in idArray){
+                if(productData[i].id===idArray[j].id){
+                    console.log('yes');
+                    productData[i].amount-=idArray[j].decreseAmt;
+                    if(productData[i].amount===0){
+                        delete productData[i];
+                    }
+                }
+             }
+        }
+        const sendRequest=async (newProdArray)=>{
+            const response=await fetch('https://agro-connect-e7a75-default-rtdb.firebaseio.com/availableProducts.json',{
+                method:'PUT',
+                body:JSON.stringify(newProdArray)
+              });
+              if(!response.ok){
+                throw new Error('Sending response failed!');
+              }
+              else{
+                console.log("Completed")
+              }
+          };
+          sendRequest(productData);
+        console.log(productData);
+
+        // dispatch(uiActions.showNotification({
+        //     status:'pending',
+        //     title:'Pending.....',
+        //     message:'Saving Order data !!'
+        //   }));
+        // const sendData=async()=>{
+        //     const response=await fetch('https://agro-connect-e7a75-default-rtdb.firebaseio.com/Order.json',{
+        //         method:'POST',
+        //         body:JSON.stringify(item),
+        //         headers:{
+        //             'Content-Type':'application/json'
+        //         }
+        //     });
+        //     if(!response.ok){
+        //         throw new Error();
+        //     };
+        // };
+        // try{
+        //     await sendData();
+        //     dispatch(uiActions.showNotification({
+        //         status:'success',
+        //         title:'Success.....',
+        //         message:'Saved Order data Successfully !!'
+        //       }));
+        // }catch(error){
+        //     dispatch(uiActions.showNotification({
+        //         status:'error',
+        //         title:'Error.....',
+        //         message:'Saving Order data failed !!'
+        //       }));
+        // }
 
     };
 };

@@ -15,6 +15,7 @@ const AddItem=(props)=>{
     const [enteredDesc,setEnteredDesc]=useState('');
     const [enteredPrice,setEnteredPrice]=useState('');
     const [enteredQuantity,setEnteredQuantity]=useState('');
+    const [enteredImgL,setEnteredImgL]=useState('');
     const [enteredExpDate,setEnteredExpDate]=useState('');
     const idChangeHandler=(event)=>{
         setEnteredId(event.target.value);
@@ -31,6 +32,9 @@ const AddItem=(props)=>{
     const quanChangeHandler=(event)=>{
         setEnteredQuantity(event.target.value);
     };
+    const imgLChangeHandler=(event)=>{
+        setEnteredImgL(event.target.value);
+    };
     const expDateChangeHandler=(event)=>{
         setEnteredExpDate(event.target.value);
     };
@@ -46,7 +50,8 @@ const AddItem=(props)=>{
         name:enteredName,
         description:enteredDesc,
         price:+enteredPrice,
-        amount:enteredQuantity,
+        amount:+enteredQuantity,
+        img:enteredImgL,
         expDate:enteredExpDate
     };
     console.log(item);
@@ -56,6 +61,7 @@ const AddItem=(props)=>{
     setEnteredDesc('');
     setEnteredPrice('');
     setEnteredQuantity('');
+    setEnteredImgL('');
     setEnteredExpDate('');
   };
     return <Modal onClick={props.onCancel}>
@@ -79,6 +85,10 @@ const AddItem=(props)=>{
          <div className={classes.field}>
          <label htmlFor="quan">Available Quantity: </label>
          <input type='number' id="quan" value={enteredQuantity} name="quan" min='0' onChange={quanChangeHandler}/>
+         </div>
+         <div className={classes.field}>
+         <label htmlFor="imgL">Image Link: </label>
+         <input type='text' id="imgL" value={enteredImgL} name="imgL" onChange={imgLChangeHandler}/>
          </div>
          <div className={classes.field}>
          <label htmlFor="expDate">Expires On: </label>

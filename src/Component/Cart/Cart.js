@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Modal from '../UI/Modal';
 import CartItem from "./CartItem";
 import classes from './Cart.module.css';
@@ -6,14 +6,17 @@ import { useDispatch,useSelector } from "react-redux";
 import { uiActions } from "../../store/ui-slice";
 import { cartActions } from "../../store/cart-slice";
 import { saveOrder } from "../../store/products-action";
+import { editData } from "../../store/products-action";
 import Notification from "../UI/Notification";
 
 const Cart=(props)=>{
     const dispatch=useDispatch();
     const notification=useSelector(state=>state.ui.Notification);
     const items=useSelector(state=>state.cart.items);
+    const avlProducts=useSelector(state=>state.prod.Available_Products);
     const isLoggedIn=useSelector(state=>state.ui.isLoggedIn);
     const totalAmount=useSelector(state=>state.cart.totalAmount);
+    const [error,setError]=useState(false);
     const hideCartHandler=()=>{
         dispatch(uiActions.hideCart());
     };
@@ -24,10 +27,25 @@ const Cart=(props)=>{
         price:item.price,
         amount:1
     };
+     let index;
+    for(const i in items){
+        if(items[i].id===item.id){
+            index=i;
+        }
+    }  
+    for(const i in avlProducts){
+        if(avlProducts[i].id===items[index].id){
+           if(avlProducts[i].amount===items[index].amount){
+               setError(true);
+               return;
+           }
+        }
+    }
     dispatch(cartActions.addItem(plusOneAdd));
    };
    const onRemoveHandler=(id)=>{
     dispatch(cartActions.removeItem(id));
+    setError(false);
    };
    const cartItems=(<ul className={classes['cart-items']}>{items.map((item)=>(
       <CartItem
@@ -45,6 +63,7 @@ const Cart=(props)=>{
     event.preventDefault();
     const orderedItems=[];
     const saveItems=[];
+    const editedId=[];
     for (const item in items){
        orderedItems.push({
         accountAddress:items[item].id,
@@ -59,6 +78,10 @@ const Cart=(props)=>{
           price:items[item].price,
           paidAmount:items[item].amount*items[item].price
        });
+       editedId.push({
+        id:items[item].id,
+        decreseAmt:+items[item].amount
+    });
     }
     const finalSave={
         orderedProducts:saveItems,
@@ -68,6 +91,7 @@ const Cart=(props)=>{
     if(confirmOrder==='100'){
     dispatch(cartActions.orderHandler(orderedItems));
     dispatch(saveOrder(finalSave));
+    dispatch(editData(editedId));
     alert("Your order has been placed");
     dispatch(cartActions.clearCart());
     }
@@ -77,6 +101,7 @@ const Cart=(props)=>{
     
  };
  return <Modal onClick={hideCartHandler}>  
+     {error && <p className={classes.error}>**Amount Exceeded**</p>}
      {cartItems}
      <div className={classes.total}>
          <span>Total Amount</span>

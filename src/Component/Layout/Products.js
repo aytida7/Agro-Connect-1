@@ -9,16 +9,18 @@ const Products=()=>{
     const availableProducts=useSelector(state=>state.prod.Available_Products);
     const notification =useSelector(state=>state.ui.Notification);
     const loadedMeals=[];
+
     for (const key in availableProducts){
         loadedMeals.push({
             id:availableProducts[key].id,
             key:key,
+            img:availableProducts[key].img,
             name:availableProducts[key].name,
             quantity:availableProducts[key].amount,
             price:availableProducts[key].price,
         });
     }
-const productsAv=loadedMeals.map(item=><Item name={item.name} key={item.id} id={item.id} price={item.price} quantity={item.quantity} />)
+const productsAv=loadedMeals.map(item=><Item img={item.img} name={item.name} key={item.id} id={item.id} price={item.price} quantity={item.quantity} />)
 let FilteredProducts=productsAv.map(item=>item);
 const searchHandler=(event)=>{
     setSearchElement(event.target.value);
